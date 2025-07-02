@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Titulo } from './titulo.entity';
 import { Seccion } from './seccion.entity';
+import { ArticleEnum } from '../enums/EnumArticle';
 
 @Entity()
 export class Article {
@@ -8,13 +9,20 @@ export class Article {
   id: string;
 
   @Column()
-  autor: string;
+  autorr: string;
 
   @Column()
   fechaPublicacion: Date;
 
   @Column()
   resumen: string;
+
+  @Column({
+    type : 'enum', 
+    enum : ArticleEnum,
+    default : ArticleEnum.TEGNOLOGY
+  })
+  category : ArticleEnum
 
   // Relación uno a muchos con títulos
   @OneToMany(() => Titulo, (titulo) => titulo.articles, { cascade: true })

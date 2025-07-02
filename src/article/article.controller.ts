@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Post, UseInterceptors } from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { CreateArticuloDto } from './dto/article.dto';
+import { CreateArticleDto } from './dto/article.dto';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('article')
 export class ArticleController {
 
@@ -9,7 +10,7 @@ export class ArticleController {
 
 
     @Post()
-    async createArticle(@Body() data : CreateArticuloDto){
+    async createArticle(@Body() data : CreateArticleDto){
         return this.articleService.createArticle(data)
 
     }

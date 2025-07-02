@@ -2,34 +2,20 @@
 import { IsString, IsNotEmpty, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
-class CreateTituloDto {
-  @IsString()
-  @IsNotEmpty()
+class CreateTitleDto {
   texto: string;
+  nivel?: number;
+  seccionIndex?: number; // índice de la sección a la que pertenece, o null si es suelto
 }
 
-class CreateSeccionTextoDto {
-  @IsString()
-  @IsNotEmpty()
+class CreateSectionDto {
   contenido: string;
 }
 
-export class CreateArticuloDto {
-  @IsString()
-  @IsNotEmpty()
+export class CreateArticleDto {
   autor: string;
-
-  @IsString()
-  @IsNotEmpty()
   resumen: string;
-
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateTituloDto)
-  titulos: CreateTituloDto[];
-
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateSeccionTextoDto)
-  seccionesTexto: CreateSeccionTextoDto[];
+  secciones: CreateSectionDto[];
+  titulos: CreateTitleDto[];
 }
+
