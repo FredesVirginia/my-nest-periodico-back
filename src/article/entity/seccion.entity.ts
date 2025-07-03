@@ -7,8 +7,8 @@ import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Seccion {
-  @PrimaryGeneratedColumn()
-  id: number;
+ @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column('text')
   contenido: string;

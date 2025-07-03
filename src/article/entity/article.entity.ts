@@ -9,7 +9,7 @@ export class Article {
   id: string;
 
   @Column()
-  autorr: string;
+  autor: string;
 
   @Column()
   fechaPublicacion: Date;

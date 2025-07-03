@@ -5,8 +5,8 @@ import { Exclude } from "class-transformer";
 
 @Entity()
 export class Titulo{
-    @PrimaryGeneratedColumn()
-    id : number;
+    @PrimaryGeneratedColumn('uuid')
+  id: string;
 
     @Column()
     texto : string ; 

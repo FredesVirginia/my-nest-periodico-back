@@ -25,7 +25,7 @@ export class ArticleService {
     try {
       // Crear instancia de artículo
       const article = new Article();
-      article.autorr = createArticuloDto.autor;
+      article.autor = createArticuloDto.autor;
       article.resumen = createArticuloDto.resumen;
       article.fechaPublicacion = new Date();
 
@@ -64,14 +64,14 @@ export class ArticleService {
       // Finalmente devolvemos el artículo completo con relaciones
       const articleNew = await this.articleRepository.findOne({
         where: { id: savedArticle.id },
-       relations: ['seccionesTexto', 'titulos'],
+       relations: ['seccionesTexto', 'titulos' , 'titulos.seccion'],
       });
 
-      if (!article) {
+      if (!articleNew) {
         throw new NotFoundException('Artículo no encontrado');
       }
 
-      return article;
+      return articleNew;
     } catch (error) {
       console.log("El error fue " , error)
       throw new BadGatewayException('Error creando el artículo');
