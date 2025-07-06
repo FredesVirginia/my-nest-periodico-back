@@ -27,6 +27,8 @@ export class ArticleService {
       const article = new Article();
       article.autor = createArticuloDto.autor;
       article.resumen = createArticuloDto.resumen;
+      article.imagen1 = createArticuloDto.imagen1;
+      article.imagen2 = createArticuloDto.imagen2;
       article.fechaPublicacion = new Date();
 
       // Primero creamos las secciones y las asignamos al artículo

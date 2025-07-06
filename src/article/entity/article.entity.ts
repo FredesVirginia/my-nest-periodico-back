@@ -12,6 +12,12 @@ export class Article {
   autor: string;
 
   @Column()
+  imagen1: string;
+
+  @Column()
+  imagen2: string;
+
+  @Column()
   fechaPublicacion: Date;
 
   @Column()
