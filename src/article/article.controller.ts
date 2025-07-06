@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Post, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/article.dto';
 
@@ -13,5 +13,11 @@ export class ArticleController {
     async createArticle(@Body() data : CreateArticleDto){
         return this.articleService.createArticle(data)
 
+    }
+
+
+    @Get()
+    async getAllArticle(){
+        return this.articleService.getAllArticles()
     }
 }

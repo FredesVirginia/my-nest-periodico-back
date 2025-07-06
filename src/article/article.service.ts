@@ -79,4 +79,18 @@ export class ArticleService {
       throw new BadGatewayException('Error creando el artículo');
     }
   }
+
+
+  async getAllArticles(){
+    try{
+    const response = await this.articleRepository.find({
+  relations: ['seccionesTexto', 'seccionesTexto.titulo', 'titulos'],
+});
+
+      return response
+    }catch(error){
+      console.log("El error fue" , error);
+      throw new BadGatewayException('Error al Mostrar Articulos' , error);
+    }
+  }
 }
