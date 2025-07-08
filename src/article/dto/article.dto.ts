@@ -5,8 +5,10 @@ import {
   IsArray,
   ValidateNested,
   IsNumber,
+  IsEnum,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { ArticleEnum } from '../enums/EnumArticle';
 
 class CreateTitleDto {
   @IsString()
@@ -32,6 +34,9 @@ export class CreateArticleDto {
   autor: string;
   @IsString()
   @IsNotEmpty()
+  @IsEnum(ArticleEnum)
+  @IsNotEmpty()
+  category : ArticleEnum
   resumen: string;
   @IsString()
   @IsNotEmpty()

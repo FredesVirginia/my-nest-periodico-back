@@ -2,6 +2,7 @@ import {
   BadGatewayException,
   Injectable,
   NotFoundException,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './entity/article.entity';
@@ -66,7 +67,7 @@ export class ArticleService {
       // Finalmente devolvemos el artículo completo con relaciones
       const articleNew = await this.articleRepository.findOne({
         where: { id: savedArticle.id },
-       relations: ['seccionesTexto', 'titulos' , 'titulos.seccion'],
+        relations: ['seccionesTexto', 'titulos', 'titulos.seccion'],
       });
 
       if (!articleNew) {
@@ -75,22 +76,34 @@ export class ArticleService {
 
       return articleNew;
     } catch (error) {
-      console.log("El error fue " , error)
+      console.log('El error fue ', error);
       throw new BadGatewayException('Error creando el artículo');
     }
   }
 
+  async getArticleById(id: string) {
+    try {
+      const response = await this.articleRepository.findOne({
+        where: { id },
+        relations: ['seccionesTexto', 'seccionesTexto.titulo', 'titulos'],
+      });
 
-  async getAllArticles(){
-    try{
-    const response = await this.articleRepository.find({
-  relations: ['seccionesTexto', 'seccionesTexto.titulo', 'titulos'],
-});
+      return response;
+    } catch (error) {
+      console.log('El error fue', error);
+      throw new BadGatewayException('Error al Mostrar Articulos', error);
+    }
+  }
+  async getAllArticles() {
+    try {
+      const response = await this.articleRepository.find({
+        relations: ['seccionesTexto', 'seccionesTexto.titulo', 'titulos'],
+      });
 
-      return response
-    }catch(error){
-      console.log("El error fue" , error);
-      throw new BadGatewayException('Error al Mostrar Articulos' , error);
+      return response;
+    } catch (error) {
+      console.log('El error fue', error);
+      throw new BadGatewayException('Error al Mostrar Articulos', error);
     }
   }
 }

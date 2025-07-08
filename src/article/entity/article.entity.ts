@@ -26,7 +26,7 @@ export class Article {
   @Column({
     type : 'enum', 
     enum : ArticleEnum,
-    default : ArticleEnum.TEGNOLOGY
+    default : ArticleEnum.PLANTILLA_1
   })
   category : ArticleEnum
 
