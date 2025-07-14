@@ -1,22 +1,34 @@
 // seccion-texto.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { Article } from './article.entity';
-import { Titulo } from './titulo.entity';
-import { Exclude } from 'class-transformer';
 
+import { Exclude } from 'class-transformer';
+import { BloqueContenido } from './bloqueContenido';
 
 @Entity()
 export class Seccion {
- @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column('text')
-  contenido: string;
+  subtitulo: string;
 
-  @ManyToOne(() => Article, (articulo) => articulo.seccionesTexto, { onDelete: 'CASCADE' })
-   @Exclude() 
+  @ManyToOne(() => Article, (articulo) => articulo.seccionesTexto, {
+    onDelete: 'CASCADE',
+  })
+  @Exclude()
   articles: Article;
 
-  @OneToMany(()=> Titulo , titulo => titulo.seccion)
-  titulo : Titulo[]
+   @OneToMany(() => BloqueContenido, (bloque) => bloque.seccion, {
+    cascade: true,
+  })
+  bloques: BloqueContenido[];
+
+  
 }

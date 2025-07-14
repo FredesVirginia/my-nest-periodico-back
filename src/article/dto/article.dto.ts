@@ -1,53 +1,53 @@
 // create-articulo.dto.ts
 import {
-  IsString,
-  IsNotEmpty,
   IsArray,
-  ValidateNested,
-  IsNumber,
   IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  ValidateNested
 } from 'class-validator';
+import { ArticleEnum, TipoBloque } from '../enums/EnumArticle';
 import { Type } from 'class-transformer';
-import { ArticleEnum } from '../enums/EnumArticle';
 
-class CreateTitleDto {
+export class CreateBloqueDto {
+  @IsEnum(TipoBloque)
+  tipo: TipoBloque;
+
   @IsString()
-  @IsNotEmpty()
-  texto: string;
-  @IsNumber()
-  @IsNotEmpty()
-  nivel: number;
-  @IsNumber()
-  @IsNotEmpty()
-  seccionIndex?: number; // índice de la sección a la que pertenece, o null si es suelto
+  contenido: string;
 }
 
-class CreateSectionDto {
+export class CreateSeccionDto {
   @IsString()
-  @IsNotEmpty()
-  contenido: string;
+  subtitulo: string;
+
+  @ValidateNested({ each: true })
+  @Type(() => CreateBloqueDto)
+  bloques: CreateBloqueDto[];
 }
 
 export class CreateArticleDto {
   @IsString()
-  @IsNotEmpty()
   autor: string;
+
+    @IsString()
+  titulo: string;
+
   @IsString()
-  @IsNotEmpty()
-  @IsEnum(ArticleEnum)
-  @IsNotEmpty()
-  category : ArticleEnum
-  resumen: string;
-  @IsString()
-  @IsNotEmpty()
   imagen1: string;
+
   @IsString()
-  @IsNotEmpty()
   imagen2: string;
-  @IsArray()
-  @IsNotEmpty()
-  secciones: CreateSectionDto[];
-  @IsArray()
-  @IsNotEmpty()
-  titulos: CreateTitleDto[];
+
+  @IsString()
+  resumen: string;
+
+  @IsEnum(ArticleEnum)
+  category: ArticleEnum;
+
+  @ValidateNested({ each: true })
+  @Type(() => CreateSeccionDto)
+  secciones: CreateSeccionDto[];
 }
+

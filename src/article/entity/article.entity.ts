@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Titulo } from './titulo.entity';
+
 import { Seccion } from './seccion.entity';
 import { ArticleEnum } from '../enums/EnumArticle';
 
@@ -10,6 +10,9 @@ export class Article {
 
   @Column()
   autor: string;
+
+  @Column()
+  titulo: string;
 
   @Column()
   imagen1: string;
@@ -26,13 +29,11 @@ export class Article {
   @Column({
     type : 'enum', 
     enum : ArticleEnum,
-    default : ArticleEnum.PLANTILLA_1
+    default : ArticleEnum.PLANTILLA_3
   })
   category : ArticleEnum
 
-  // Relación uno a muchos con títulos
-  @OneToMany(() => Titulo, (titulo) => titulo.articles, { cascade: true })
-  titulos: Titulo[];
+
 
   // Relación uno a muchos con secciones de texto
   @OneToMany(() => Seccion, (seccion) => seccion.articles, { cascade: true })
