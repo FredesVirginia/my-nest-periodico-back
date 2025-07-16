@@ -62,7 +62,7 @@ export class ArticleService {
     try {
       const response = await this.articleRepository.findOne({
         where: { id },
-        relations: ['seccionesTexto', 'seccionesTexto.titulo', 'titulos'],
+        relations: ['seccionesTexto', 'seccionesTexto.bloques'],
       });
 
       return response;
