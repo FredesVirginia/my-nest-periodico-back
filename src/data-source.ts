@@ -6,6 +6,7 @@ import { Article } from './article/entity/article.entity';
 
 import { Seccion } from './article/entity/seccion.entity';
 import { BloqueContenido } from './article/entity/bloqueContenido';
+import { User } from './login/entity/user.entity';
 
 
 dotenv.config();
@@ -16,7 +17,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER!,
   password: process.env.DB_PASSWORD!,
   database: process.env.DB_NAME!,
-  entities: [Article , Seccion , BloqueContenido],
+  entities: [Article , Seccion , BloqueContenido , User],
   migrations: ['src/migration/*.ts'],
   synchronize: false,
 });
