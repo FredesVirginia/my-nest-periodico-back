@@ -4,22 +4,23 @@ import * as joi from "joi";
 
 interface EnvVars{
    
-    DB_HOST: string;
-    DB_PORT: number;
-    DB_USER:string;
-    DB_PASSWORD:string;
-    DB_NAME:string;
-   
+    // DB_HOST: string;
+    // DB_PORT: number;
+    // DB_USER:string;
+    // DB_PASSWORD:string;
+    // DB_NAME:string;
+   DATABASE_URL:string;
 }
 
 const envsShema = joi.object({
   
    
-    DB_HOST:joi.string().required(),
-    DB_PORT:joi.number().required(),
-    DB_USER:joi.string().required(),
-    DB_PASSWORD:joi.string().required(),
-    DB_NAME:joi.string().required(),
+    // DB_HOST:joi.string().required(),
+    // DB_PORT:joi.number().required(),
+    // DB_USER:joi.string().required(),
+    // DB_PASSWORD:joi.string().required(),
+    // DB_NAME:joi.string().required(),
+    DATABASE_URL:joi.string().required(),
    
 }).unknown(true);
 
@@ -35,10 +36,11 @@ if(error){
 const envVars : EnvVars = value;
 
 export const envs = {
-    port : envVars.DB_PORT,
-    dbHost: envVars.DB_HOST,
-    dbName : envVars.DB_NAME,
-    dbPassword: envVars.DB_PASSWORD,
-    dbUser: envVars.DB_USER
+    // port : envVars.DB_PORT,
+    // dbHost: envVars.DB_HOST,
+    // dbName : envVars.DB_NAME,
+    // dbPassword: envVars.DB_PASSWORD,
+    // dbUser: envVars.DB_USER
+    dbUrl: envVars.DATABASE_URL
    
 }
