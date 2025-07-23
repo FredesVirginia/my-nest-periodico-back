@@ -2,26 +2,25 @@
 
 
 // api/index.ts
-const express = require('express');
-const serverless = require('serverless-http');
+import express from 'express';
+import serverless from 'serverless-http';
 const { createNestApp } = require('../dist/main');
 
-const expressApp = express();
+const app = express();
 
-let serverlessHandler;
+let serverlessHandler: any;
 
-const setup = async () => {
-  await createNestApp(expressApp);
-  serverlessHandler = serverless(expressApp);
-};
+async function bootstrap() {
+  await createNestApp(app);
+  serverlessHandler = serverless(app);
+}
 
-setup();
+bootstrap();
 
-module.exports.handler = async (event, context) => {
-  if (!serverlessHandler) {
-    await setup();
-  }
+export const handler = async (event: any, context: any) => {
+  if (!serverlessHandler) await bootstrap();
   return serverlessHandler(event, context);
 };
+
 
 
