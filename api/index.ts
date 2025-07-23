@@ -2,12 +2,13 @@
 
 
 // api/index.ts
-import * as express from 'express';
-import { createNestApp } from '../src/main';
-import serverless from 'serverless-http';
+const express = require('express');
+const serverless = require('serverless-http');
+const { createNestApp } = require('../dist/main');
 
 const expressApp = express();
 
-createNestApp(expressApp); // Inicializa Nest en Express
+createNestApp(expressApp).then(() => {
+  module.exports.handler = serverless(expressApp);
+});
 
-export const handler = serverless(expressApp);
