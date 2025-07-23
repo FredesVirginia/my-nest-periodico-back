@@ -8,9 +8,20 @@ const { createNestApp } = require('../dist/main');
 
 const expressApp = express();
 
+let serverlessHandler;
 
+const setup = async () => {
+  await createNestApp(expressApp);
+  serverlessHandler = serverless(expressApp);
+};
 
-createNestApp(expressApp).then(() => {
-  module.exports.handler = serverless(expressApp);
-});
+setup();
+
+module.exports.handler = async (event, context) => {
+  if (!serverlessHandler) {
+    await setup();
+  }
+  return serverlessHandler(event, context);
+};
+
 
