@@ -9,7 +9,7 @@ interface EnvVars{
     DB_USER:string;
     DB_PASSWORD:string;
     DB_NAME:string;
-//    DATABASE_URL:string;
+  DATABASE_URL:string;
 }
 
 const envsShema = joi.object({
@@ -20,7 +20,7 @@ const envsShema = joi.object({
     DB_USER:joi.string().required(),
     DB_PASSWORD:joi.string().required(),
     DB_NAME:joi.string().required(),
-   // DATABASE_URL:joi.string().required(),
+    DATABASE_URL:joi.string().required(),
    
 }).unknown(true);
 
@@ -36,11 +36,11 @@ if(error){
 const envVars : EnvVars = value;
 
 export const envs = {
-    port : envVars.DB_PORT,
-    dbHost: envVars.DB_HOST,
-    dbName : envVars.DB_NAME,
-    dbPassword: envVars.DB_PASSWORD,
-    dbUser: envVars.DB_USER
-// dbUrl: envVars.DATABASE_URL
+    // port : envVars.DB_PORT,
+    // dbHost: envVars.DB_HOST,
+    // dbName : envVars.DB_NAME,
+    // dbPassword: envVars.DB_PASSWORD,
+    // dbUser: envVars.DB_USER
+ dbUrl: envVars.DATABASE_URL
    
 }
