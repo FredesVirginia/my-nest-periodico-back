@@ -15,11 +15,11 @@ interface EnvVars{
 const envsShema = joi.object({
   
    
-    DB_HOST:joi.string().required(),
-    DB_PORT:joi.number().required(),
-    DB_USER:joi.string().required(),
-    DB_PASSWORD:joi.string().required(),
-    DB_NAME:joi.string().required(),
+    // DB_HOST:joi.string().required(),
+    // DB_PORT:joi.number().required(),
+    // DB_USER:joi.string().required(),
+    // DB_PASSWORD:joi.string().required(),
+    // DB_NAME:joi.string().required(),
     DATABASE_URL:joi.string().required(),
    
 }).unknown(true);
