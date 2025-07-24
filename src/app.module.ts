@@ -41,7 +41,8 @@ import { LoginModule } from './login/login.module';
 
         setTimeout(() => {
           logger.log(
-          `🗄️  Conectado a PostgreSQL en: ${envs}:${envs.dbUrl}`,
+          
+            `🗄️  Conectado a PostgreSQL en: ${envs}:${envs.dbUrl}`,
            //  `🗄️  Conectado a PostgreSQL en: ${envs}:${envs.port}/${envs.dbName}`,
           );
           logger.debug('✅ ¡Conexión exitosa!');
